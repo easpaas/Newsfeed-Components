@@ -113,16 +113,14 @@ const data = [
 
 */
 
-// data object => {title: "", date: "", p1: "", p2: "", p3: ""}
-
 function createArticle(data) {
   // create article elements
   const article = document.createElement('div');
   const titleH2 = document.createElement('h2');
   const date = document.createElement('p');
-  const paragraph1 = document.createElement('p');
-  const paragraph2 = document.createElement('p');
-  const paragraph3 = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
   const expandBtn = document.createElement('span');
 
   // add classes to targeted elements
@@ -133,21 +131,33 @@ function createArticle(data) {
   // append elements to correct parent
   article.append(titleH2);
   article.append(date);
-  article.append(paragraph1);
-  article.append(paragraph2);
-  article.append(paragraph3);
+  article.append(p1);
+  article.append(p2);
+  article.append(p3);
   article.append(expandBtn);
 
   // apply text content to article elements from arg
   titleH2.textContent = data.title;
   date.textContent = data.date;
-  paragraph1.textContent = data.p1;
-  paragraph2.textContent = data.p2;
-  paragraph3.textContent = data.p3;
-  // expandBtn.textContent = 'menu.png';
+  p1.textContent = data.firstParagraph;
+  p2.textContent = data.secondParagraph;
+  p3.textContent = data.thirdParagraph;
+  expandBtn.textContent = 'expand';
 
   // event listener for expand button
-  // expandBtn.addEventListener
+
+  // This event listener should toggle the class 'article-open' on the 'article' div.
+  expandBtn.addEventListener('click', (event) => {
+    article.classList.toggle('article-open');
+  });
 
   return article;
 }
+
+// select parent element of article
+const articles = document.querySelector('.articles');
+
+// create an article
+data.forEach(articleData => {
+  articles.append(createArticle(articleData));
+});
